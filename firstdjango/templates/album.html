@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Gurmukhi&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/38474d2f3d.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js" integrity="sha512-RWosNnDNw8FxHibJqdFRySIswOUgYhFxnmYO3fp+BgCU7gfo4z0oS7mYFBvaa8qu+axY39BmQOrhW3Tp70XbaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" integrity="sha512-CIYsJUa3pr1eoXlZFroEI0mq0UIMUqNouNinjpCkSWo3Bx5NRlQ0OuC6DtEB/bDqUWnzXc1gs2X/g52l36N5iw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    {% load static %}  
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="static/style.css">
+    <title>{{albums.name}}</title>
+</head>
+
+<body style="display: grid; grid-template-columns: repeat(11, 9.09%); grid-template-rows: repeat(10, 10%); margin: 0; padding: 0; font-family: Tiro Gurmukhi">
+    <div style="background: black; grid-column: 1/3; position: sticky; top: 0; grid-row: 1/18;">
+        <div style="color: white; padding: 40px 40px 10px 40px;">
+            {% if albums.artist == 'brookfield corp' %}
+            <h1 style="font-size: 35px;">unc<span class="star" style="color: blue; font-size: 25px">&#9733;</span>vered </h1>
+            {% elif albums.artist == 'sundial' %}
+            <h1 style="font-size: 35px;">unc<span class="star" style="color: red; font-size: 25px">&#9733;</span>vered </h1>  
+            {% endif %}
+        </div>
+        <div style="color: white; padding: 40px 40px 10px 40px">
+            <a style="font-size: 25px">&#9733;  home</a>
+        </div>
+        <br>
+        <div style="color: white; padding: 0px 10px 10px 40px;">
+            <a href="/brookfield" style="font-size:25px; text-decoration: none; color: white">&#9839; <span style="margin-left: .3em">brookfield corp</span></a>
+        </div>
+        <div style="color: white; padding: 0px 40px 10px 40px">
+            <a href="/sundial" style="font-size:25px; text-decoration: none; color: white">&#9839; <span style="margin-left: .3em">sundial</span></a>
+        </div>
+        <div style="color: white; padding: 0px 40px 10px 40px;">
+            <a style="font-size:25px">&#9839; <span style="margin-left: .3em">san slackadore</span></a>
+        </div>
+        <br>
+        <div style="color: white; padding: 0px 40px 10px 40px;">
+            <a class="ryan" style="font-size:25px; color: white; text-decoration: none;" href="/magic-sheet">&#8483; <span style="margin-left: .3em">lists</span></a>
+        </div>
+    </div>
+    <div style="grid-row: 1; grid-column-start: 3; grid-column-end:12; height: 20rem;background: rgb(255,255,255);
+    background: linear-gradient(82deg, rgba(255,255,255,1) 0%, rgba(1,2,0,1) 100%);">
+        <img style="height: 15rem; margin: 40px 20px 20px 50px; box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);" src="{{albums.image}}">
+        <div style="display: flex">
+            <img style="height: 20rem; width: 100vw;"  src="https://film-grab.com/wp-content/uploads/photo-gallery/03%20(82).jpg?bwg=1547146117">
+            <h1 style="position: absolute; top: 20px; padding: 40px;font-size: 100px; color: white; font-family: Tiro Gurmukhi; margin-left: 280px;">{{albums.name}}</h1>
+            <h4 style="position: absolute; top: 170px; padding: 40px;font-size: 30px; color: white; font-family: Tiro Gurmukhi; margin-left: 280px;">{{albums.artist}}</h4>
+        </div>
+    </div>
+   
+
+    <div style="height: fit-content; grid-column: 3/12; grid-row: 1; padding: 3rem; margin-top: 320px; background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 54%, rgb(23, 25, 38) 76%); color: white;">
+    <div style="height: 100vh; display: flex; flex-direction: column; gap: 20px">
+        {% for i in tracks %}
+        <div id="music-container" style="display: flex; gap: 20px">
+        <h3>{{i.tracklist_id}}</h3>
+        <i id="play" style="color: white; position: relative; top: 22px" class="fas fa-play"></i>
+        <h3 class="title">{{i.title}}</h3>
+        <audio class="player">
+            <source src="/static/{{i.extension}}" >
+        </audio>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+</body>
+
+</html>

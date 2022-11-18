@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@1,100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a57f5fccbf.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link href="{% static 'style.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Document</title>
+</head>
+<body style="display: grid; grid-template-columns: 20% 20% 20% 20% 20%; grid-template-rows: minmax(150px, auto); margin: 0; padding: 0; font-family: Tiro Gurmukhi">
+    <div id="left-bar" style="background: black; grid-column:1; z-index: 1; font-weight: 100; position: sticky; top: 0;">
+        <div style="position: sticky; top: 0">
+        <div style="color: white; padding: 40px 40px 50px 40px;">
+            <a style="text-decoration: none; color: white"><h1 style="font-size: 40px; margin-right: 3%; font-family: 'Anybody'; padding: 1%; margin-top: 1%; font-weight: 100">uncovered</h1></a>
+        </div>
+        <div style="color: white; padding: 10px 40px 50px 40px">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/magic-sheet"><span style="margin-right: .4rem">&#10032;</span> random rym</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/random-artist"><span style="margin-right: .4rem">&#10032;</span> random highly rated artist</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/random-album"><span style="margin-right: .4rem">&#10032;</span> random highly rated album</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/charts"><span style="margin-right: .4rem">&#10032;</span> charts</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/top-random"><span style="margin-right: .4rem">&#10032;</span> top albums of a random person</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/great-scene"><span style="margin-right: .4rem">&#10032;</span> the great scene chronology</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw">
+            <a style="font-size: 19px; font-family: Anybody" class="nav-link active" aria-current="page" href="/recs"><span style="margin-right: .4rem">&#10032;</span> rym recommendations</a>
+        </div>
+        <div style="color: white; padding: 0px 40px 50px 40px; width: 20vw; display: flex; gap: 30px;">
+            <a style="font-size: 19px; font-family: Anybody;" class="nav-link active" aria-current="page" href="/listening-log"><span style="margin-right: .4rem">&#10032;</span>listening log</a>
+        </div>
+    </div>
+    </div>
+      
+    <div style="background: rgba(255, 231, 231, 0.7); height: 100%; grid-column: 2/6;">
+        <div style="grid-column: 1/5; padding: 10px; background:rgb(182, 182, 255); display: flex; justify-content:right; position: sticky; top: 0; z-index: 1;">
+            <a href="/add-listening-log"><button class="btn btn-light" style="font-family:'Anybody'; position: sticky; top: 0;">add</button></a>
+        </div>
+            {% for i in albums %}
+            <div class="card" id="listening-log-album" style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; height: fit-content; padding: 30px; margin: 20px; grid-column: 1 / 5; border-radius: 20px; font-family: 'Anybody'; font-weight: 300">
+                <div>
+                    <h1 style="margin-bottom: 20px">{{i.album}}</h1>
+                    <h2 style="margin-bottom: 20px">{{i.artist}}</h2>
+                    <img id="listening-log-album-image" style="height: 400px; width: 400px; border-radius: 20px;" src="{{i.image}}">
+                 </div>
+                <div style="grid-column: 5;">
+                    <h2 style="width: 320px">{{i.created_at}}</h2>
+                </div>
+                <div style="display: flex; grid-column: 3; grid-row: 2; position: absolute; bottom: 240px; font-size: 40px;">
+                    {% if i.rating == 0 %} 
+                     <h2>This shit is awful</h2>
+                    {% endif %}
+                    {% if i.rating == 1 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star-half-stroke"></i>
+                    {% endif %}
+                    {% if i.rating == 2 %} 
+                    <i style="font-size: 90px"class="fa-solid fa-star"></i>
+                    {% endif %}
+                    {% if i.rating == 3 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star-half-stroke"></i>
+                    {% endif %}
+                    {% if i.rating == 4 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    {% endif %}
+                    {% if i.rating == 5 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star-half-stroke"></i>
+                    {% endif %}
+
+                    {% if i.rating == 6 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    {% endif %}
+
+                    {% if i.rating == 7 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star-half-stroke"></i>
+                    {% endif %}
+
+                    {% if i.rating == 8 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    {% endif %}
+
+                    {% if i.rating == 9 %} 
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star-half-stroke"></i>
+                    {% endif %}
+
+                    {% if i.rating == 10 %}
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    <i style="font-size: 90px" class="fa-solid fa-star"></i>
+                    {% endif %}
+                    <!-- <h2 style="width: 320px; font-size: 100px">{{i.rating}}</h2> -->
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+
+    <script>
+
+        const randomNum1 = Math.floor(Math.random() * 160);
+        const randomNum2 = Math.floor(Math.random() * 300);
+        const randomNum3 = Math.floor(Math.random() * 220);
+        const randomNum4 = Math.floor(Math.random() * 160);
+        const randomNum5 = Math.floor(Math.random() * 300);
+        const randomNum6 = Math.floor(Math.random() * 220);
+
+        const randomNumberBorder = ' 6px solid rgb(' + randomNum1 + ',' + randomNum2 + ',' + randomNum3 + ')';
+
+        const randomNumberBoxShadow = '10px 10px 10px rgb(' + randomNum4 + ',' + randomNum5 + ',' + randomNum6 + ')';
+
+        window.onload = function() {
+            const allAlbums = document.querySelectorAll('#listening-log-album');
+
+            allAlbums.forEach(item => {
+                item.style.border = randomNumberBorder;
+                item.style.boxShadow = randomNumberBoxShadow;
+            })
+
+            const allAlbumsImage = document.querySelectorAll('#listening-log-album-image');
+
+            allAlbumsImage.forEach(item => {
+                item.style.border = randomNumberBorder;
+                item.style.boxShadow = randomNumberBoxShadow;
+            }
+            )
+
+            const allStars = document.querySelectorAll('.fa-solid');
+
+            allStars.forEach(item => {
+                item.style.color = 'rgb(' + randomNum1 + ',' + randomNum2 + ',' + randomNum3 + ')';
+            }
+            )
+
+
+
+            document.querySelectorAll('#listening-log-album').style.boxShadow = randomNumberBoxShadow
+
+            document.querySelectorAll('.fa-solid').style.boxShadow = randomNumberBoxShadow
+        }
+    </script>
+</body>
+</html>
